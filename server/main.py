@@ -27,7 +27,7 @@ app.add_middleware(
         "http://localhost:5174", 
         "http://localhost:5175",
         "https://*.vercel.app",  # Allow Vercel preview deployments
-        "https://your-domain.vercel.app"  # Replace with your actual domain
+        "https://study-byte-nu.vercel.app"  # Replace with your actual domain
     ],
     allow_credentials=True,
     allow_methods=["GET", "POST", "OPTIONS"],
