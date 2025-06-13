@@ -5,7 +5,8 @@
       "src": "client/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "buildCommand": "npm run build",
+        "outputDirectory": "dist"
       }
     },
     {
@@ -13,11 +14,6 @@
       "use": "@vercel/python"
     }
   ],
-  "functions": {
-    "server/main.py": {
-      "runtime": "python3.9"
-    }
-  },
   "routes": [
     {
       "src": "/api/(.*)",
@@ -25,9 +21,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "client/dist/$1"
+      "dest": "client/dist/index.html"
     }
-  ],
-  "outputDirectory": "client/dist",
-  "buildCommand": "cd client && npm run build"
+  ]
 } 
