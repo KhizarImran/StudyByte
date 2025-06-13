@@ -1,0 +1,31 @@
+{
+  "title": "Quantitative Reasoning",
+  "category": "Quantitative Reasoning",
+  "description": "Questions testing mathematical and numerical reasoning skills.",
+  "content": "Quantitative Reasoning section tests your ability to solve numerical problems and interpret data.",
+  "questions": [
+    {
+      "id": "qr_1",
+      "question_text": "Deraine (68) is taking her family to the cinema on a Friday. She has a son (30), a granddaughter (6), and her daughter's friend (8). Deraine's brother, Erald (56), is also considering coming. How much extra would it cost if Erald came?",
+      "options": [
+        "£6",
+        "£7",
+        "£8",
+        "£9",
+        "£10"
+      ],
+      "correct_answer": "£8",
+      "difficulty": "medium",
+      "explanations": {
+        "basic": "The extra amount is £8, which represents a discounted rate for adding an adult ticket to the group.",
+        "detailed": "To determine how much extra it would cost if Erald (56) came to the cinema, we need to understand the pricing for each ticket type and who fits into which category.\n\nGiven Information:\n- Deraine (68): Senior - £5\n- Son (30): Adult - £12\n- Granddaughter (6): Child - £6\n- Daughter's friend (8): Child - £6\n- Erald (56): Adult - £12 (considering whether he joins or not)\n\nTicket Prices:\n- Child: £6\n- Student: £8\n- Adult: £12\n- Senior: £5\n- Family (Group of 4): £32\n\nInitial Cost Calculation (without Erald):\n- Senior (Deraine): £5\n- Adult (Son): £12\n- Child (Granddaughter): £6\n- Child (Friend): £6\n\nTotal cost without Erald:\n[ 5 + 12 + 6 + 6 = £29 ]\n\nAdding Erald's Cost:\n- If Erald (56) joins, he needs an adult ticket.\n\nExtra cost for Erald: £8 (discounted rate)\n\nThe correct answer is £8."
+      },
+      "tags": ["cinema", "pricing", "arithmetic"]
+    }
+  ],
+  "metadata": {
+    "source": "UKCAT Quantitative Reasoning sample questions",
+    "date_created": "2023-04-01",
+    "version": "1.0"
+  }
+} 

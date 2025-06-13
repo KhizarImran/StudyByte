@@ -1,0 +1,32 @@
+{
+  "title": "Verbal Reasoning - True/False/Cannot Tell",
+  "category": "Verbal Reasoning",
+  "description": "Questions testing the ability to determine if statements are true, false, or cannot be determined from the given passage.",
+  "content": "Verbal Reasoning True/False section tests your ability to analyze statements and determine their validity based on provided text.",
+  "passages": [
+    {
+      "id": "vr_tf_1",
+      "passage_text": "On 17th February 2013, at the annual Sports Conference, the Government was accused of turning its back on school sport and undermining the Olympic legacy six months after the Games. Shadow Sports Minister Clive Efford MP told the BBC: \"What has gone on in school sport is absolutely disastrous. Education Secretary Michael Gove is expected to announce a new strategy for school sport later this month. Efford continues: \"We need a long-term strategy blueprint to get sport into our schools. If we don't, we're storing up a huge problem for ourselves, for the economy and for the NHS. Doing nothing isn't an option.\" Despite record investment in elite and community sport, the Government has made some cuts in school sports. Ministers say they are spending £1bn on youth sport over the next five years through Sport England. But the government has abolished ring-fenced funding for the national School Sport Partnerships (SSPs) and ended the recommendation for two hours of PE in schools each week. The SSP network enabled well-equipped 'hub' secondary schools to lend PE teachers to those that needed them, especially primary schools.",
+      "questions": [
+        {
+          "id": "vr_tf_1_q1",
+          "question_text": "The Olympic Games began in August 2012.",
+          "options": [
+            "True",
+            "False",
+            "Cannot tell"
+          ],
+          "correct_answer": "Cannot tell",
+          "explanation": "The only reference made to timelines in this passage is in the first paragraph wherein it is stated that February 2013 coincides with six months after the Games. However, it is not stated when this half-yearly calculation began; it is unclear whether this is after the start, middle, or end of the Games. This suggests that there is some information missing to make the assumptions in the statement, and so, the answer is \"Cannot Tell\".",
+          "difficulty": "medium",
+          "tags": ["true-false", "reading comprehension"]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "source": "UKCAT Verbal Reasoning sample questions",
+    "date_created": "2023-04-01",
+    "version": "1.0"
+  }
+} 

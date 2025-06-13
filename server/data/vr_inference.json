@@ -1,0 +1,33 @@
+{
+  "title": "Verbal Reasoning - Making Inference",
+  "category": "Verbal Reasoning",
+  "description": "Questions testing the ability to make logical inferences from text passages.",
+  "content": "Verbal Reasoning Making Inference section tests your ability to draw valid conclusions from given information.",
+  "passages": [
+    {
+      "id": "vr_inf_1",
+      "passage_text": "Stonehaven, a seaside town on Scotland's east coast, first made its culinary mark with the invention of the deep-fried Mars Bar. These days it's making a new gastronomic name for itself, thanks to the success of The Bay, the local fish and chip shop. Right on the harbour front, seagulls swoop overhead, and the waves rolling in from the North Sea sometimes crash right up against the door. But, alongside its picturesque location and traditional menu, The Bay is scoring points when it comes to sustainability.\n\nPartly because the natural world is so literally on his doorstep, chef Calum Richardson decided right from the outset The Bay wouldn't be leaving a waste trail of plastic cutlery, pots and packaging. So, all of the tableware he uses from teacups to knives and forks is 100% compostable.\n\n'The packaging I use for fish and chips is quite expensive compared to what a lot of other businesses are using,' admits Calum, 'But I thought, I'll put 10p on the product and have a clear conscience.'\n\nHis takeaway fish suppers are served in brown cardboard boxes. The cutlery is made of a plant-derived bioplastic known as CPLA (made from polylactic acid). One or two of the more argumentative customers like to point to the transparent tubs he uses for tartare sauce and accuse him of double-standards. They look just like plastic, but those too are compostable, made from corn starch. It all makes perfect sense, since the food waste - smears of tomato sauce, left-over mushy peas, the odd greasy chip - can be ignored as part of a happy compostable mix.",
+      "source": "adapted from www.bbc.co.uk/",
+      "questions": [
+        {
+          "id": "vr_inf_1_q1",
+          "question_text": "The Bay serves deep-fried Mars Bars.",
+          "options": [
+            "True",
+            "False",
+            "Cannot tell"
+          ],
+          "correct_answer": "Cannot tell",
+          "explanation": "Here, we are told that the town of Stonehaven invented the deep-fried Mars Bar, and that The Bay is a restaurant in this locality. Therefore, you may assume that it is reasonable to infer that The Bay serves this delicacy, but it is not. In the absence of any further information, we do not know which establishments in Stonehaven serve the dish. Therefore, the answer is a distinct \"Cannot Tell\".\n\nNote: How this is not a false statement as we are not told that The Bay does not serve deep-fried Mars Bars.",
+          "difficulty": "medium",
+          "tags": ["inference", "reading comprehension"]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "source": "UKCAT Verbal Reasoning sample questions",
+    "date_created": "2023-04-01",
+    "version": "1.0"
+  }
+} 
