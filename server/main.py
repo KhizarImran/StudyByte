@@ -8,6 +8,7 @@ import logging
 from utils.deepseek_client import deepseek_client
 from utils.openai_client import openai_client # Use this for OpenAI 
 import json
+from mangum import Mangum
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -18,10 +19,16 @@ load_dotenv()
 
 app = FastAPI()
 
-# Add CORS middleware with more specific configuration
+# Add CORS middleware - Updated for production deployment
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:5174", "http://localhost:5175"],
+    allow_origins=[
+        "http://localhost:5173", 
+        "http://localhost:5174", 
+        "http://localhost:5175",
+        "https://*.vercel.app",  # Allow Vercel preview deployments
+        "https://your-domain.vercel.app"  # Replace with your actual domain
+    ],
     allow_credentials=True,
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
@@ -40,7 +47,16 @@ class ChatResponse(BaseModel):
 async def read_root():
     return {"status": "healthy", "message": "API is running"}
 
-@app.post("/chat", response_model=ChatResponse)
+# Update routes to use /api prefix for Vercel routing
+@app.get("/api")
+async def api_root():
+    return {"status": "healthy", "message": "StudyByte API is running"}
+
+@app.get("/api/health")
+async def health_check():
+    return {"status": "healthy", "message": "API is running"}
+
+@app.post("/api/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
     try:
         logger.info(f"Received chat request with message: {request.message}")
@@ -60,7 +76,7 @@ async def chat(request: ChatRequest):
         logger.error(f"Error processing chat request: {str(e)}", exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/chat/with-context")
+@app.post("/api/chat/with-context")
 async def chat_with_context(request: ChatRequest):
     try:
         logger.info(f"Received chat with context request: {request.message}")
@@ -77,7 +93,9 @@ async def chat_with_context(request: ChatRequest):
         logger.error(f"Error processing chat with context request: {str(e)}", exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.websocket("/ws/chat")
+# Note: WebSocket support is limited in Vercel serverless functions
+# Consider using polling or Server-Sent Events for real-time features
+@app.websocket("/api/ws/chat")
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     try:
@@ -103,6 +121,9 @@ async def websocket_endpoint(websocket: WebSocket):
             "type": "error",
             "content": str(e)
         }))
+
+# Vercel serverless function handler
+handler = Mangum(app)
 
 if __name__ == "__main__":
     import uvicorn

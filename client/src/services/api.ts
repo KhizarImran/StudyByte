@@ -1,8 +1,11 @@
 import axios, { AxiosError } from 'axios';
 import { StreamCallback } from '../types/chat';
 
-const API_URL = 'http://localhost:8000';
-const WS_URL = 'ws://localhost:8000';
+// Environment-aware API configuration
+const isDevelopment = import.meta.env.DEV;
+const API_URL = isDevelopment ? 'http://localhost:8000' : '/api';
+const WS_URL = isDevelopment ? 'ws://localhost:8000' : 
+    `${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}/api`;
 
 interface ChatResponse {
     answer: string;
@@ -54,7 +57,7 @@ export const chatService = {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                     },
-                    timeout: 10000,
+                    timeout: 30000, // Increased timeout for serverless functions
                 }
             );
             
@@ -65,7 +68,21 @@ export const chatService = {
     },
 
     // WebSocket streaming implementation
+    // Note: WebSocket functionality may be limited on Vercel serverless functions
+    // Consider implementing Server-Sent Events (SSE) as an alternative
     async sendMessageStream(message: string, onStream: StreamCallback, context?: string): Promise<void> {
+        // For production deployment, fall back to non-streaming if WebSocket fails
+        if (!isDevelopment) {
+            console.warn('WebSocket streaming may not work on Vercel. Using fallback to regular API call.');
+            try {
+                const response = await this.sendMessage(message, context);
+                onStream(response.answer, true, response.answer);
+                return;
+            } catch (error) {
+                throw error;
+            }
+        }
+
         return new Promise((resolve, reject) => {
             const ws = new WebSocket(`${WS_URL}/ws/chat`);
             
