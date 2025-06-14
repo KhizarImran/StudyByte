@@ -1,0 +1,10 @@
+{
+  "name": "studybyte",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cd client && npm ci && npm run build && cd .. && cp -r client/dist/* . || xcopy /E /I client\\dist\\* ."
+  },
+  "engines": {
+    "node": "18.x"
+  }
+} 

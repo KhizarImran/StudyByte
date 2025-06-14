@@ -1,21 +1,28 @@
+import sys
+import os
 from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
-import os
 from dotenv import load_dotenv
 import logging
-from utils.deepseek_client import deepseek_client
-from utils.openai_client import openai_client # Use this for OpenAI 
 import json
-from mangum import Mangum
+
+# Add the current directory to Python path for Vercel compatibility
+current_dir = os.path.dirname(os.path.abspath(__file__))
+if current_dir not in sys.path:
+    sys.path.append(current_dir)
 
 # Configure logging
-logging.basicConfig(level=logging.INFO)
+log_level = logging.WARNING if os.getenv("VERCEL") else logging.INFO
+logging.basicConfig(level=log_level)
 logger = logging.getLogger(__name__)
 
 # Load environment variables
 load_dotenv()
+
+# Import from utils package
+from utils import openai_client
 
 app = FastAPI()
 
@@ -61,13 +68,13 @@ async def chat(request: ChatRequest):
     try:
         logger.info(f"Received chat request with message: {request.message}")
         
-        # Generate response using DeepSeek
-        response = await deepseek_client.generate_response(
+        # Generate response using OpenAI
+        response = await openai_client.generate_response(
             message=request.message,
             context=request.context
         )
         
-        logger.info(f"Received response from DeepSeek: {response}")
+        logger.info(f"Received response from OpenAI: {response}")
         return ChatResponse(
             answer=response,
             context=request.context
@@ -81,7 +88,7 @@ async def chat_with_context(request: ChatRequest):
     try:
         logger.info(f"Received chat with context request: {request.message}")
         # This endpoint will be enhanced later with RAG capabilities
-        response = await deepseek_client.generate_response(
+        response = await openai_client.generate_response(
             message=request.message,
             context=request.context
         )
@@ -93,8 +100,9 @@ async def chat_with_context(request: ChatRequest):
         logger.error(f"Error processing chat with context request: {str(e)}", exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
 
-# Note: WebSocket support is limited in Vercel serverless functions
-# Consider using polling or Server-Sent Events for real-time features
+# WebSocket support is disabled for Vercel serverless compatibility
+# Uncomment for local development if needed
+"""
 @app.websocket("/api/ws/chat")
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
@@ -106,8 +114,8 @@ async def websocket_endpoint(websocket: WebSocket):
             
             logger.info(f"Received WebSocket message: {request}")
             
-            # Generate streaming response
-            await deepseek_client.generate_stream(
+            # Generate streaming response using OpenAI
+            await openai_client.generate_stream(
                 websocket=websocket,
                 message=request.get("message", ""),
                 context=request.get("context")
@@ -121,10 +129,9 @@ async def websocket_endpoint(websocket: WebSocket):
             "type": "error",
             "content": str(e)
         }))
+"""
 
-# Vercel serverless function handler
-handler = Mangum(app)
-
+# For local development
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000) 
