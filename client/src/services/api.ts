@@ -30,6 +30,14 @@ interface StreamMessage {
     };
 }
 
+// Helper for getting headers
+const getHeaders = () => {
+    return {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    };
+};
+
 // Helper for error handling
 const handleAxiosError = (error: unknown): never => {
     console.error('API Error:', error);
@@ -53,10 +61,7 @@ export const chatService = {
                 `${API_URL}/chat/with-context`,
                 { message, context },
                 {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                    },
+                    headers: getHeaders(),
                     timeout: 30000, // Increased timeout for serverless functions
                 }
             );
